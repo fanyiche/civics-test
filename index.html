@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#22325a">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>入籍公民考试题库</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: phone-first single column "study app" with a fixed bottom tab bar; document/certificate feel — navy ink on cool paper, a seal-red accent for the official bits */
+:root{
+  --paper:#f3f5f8; --card:#ffffff; --ink:#18223a; --muted:#5d6782; --line:#dde2ec;
+  --navy:#22325a; --navy-soft:#e6ebf5; --seal:#b0353a; --seal-soft:#f8e7e7;
+  --good:#2f7a4f; --good-soft:#e3f2e9; --warn:#a8641a; --warn-soft:#fbefdd;
+  --display:"Libre Caslon Text", Georgia, "Noto Serif SC", serif;
+  --body:"Source Sans 3", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --zh:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f1424; --card:#182036; --ink:#e8ecf6; --muted:#9aa5c2; --line:#2a3452;
+  --navy:#9fb4ea; --navy-soft:#22305a; --seal:#ec7a7e; --seal-soft:#3a2026;
+  --good:#6fcf97; --good-soft:#1b3428; --warn:#f0b56b; --warn-soft:#3a2c18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f1424; --card:#182036; --ink:#e8ecf6; --muted:#9aa5c2; --line:#2a3452;
+  --navy:#9fb4ea; --navy-soft:#22305a; --seal:#ec7a7e; --seal-soft:#3a2026;
+  --good:#6fcf97; --good-soft:#1b3428; --warn:#f0b56b; --warn-soft:#3a2c18; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:600px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px calc(96px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.zh{font-family:var(--zh);color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px 16px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+.btn.good{background:var(--good);border-color:var(--good);color:var(--paper)}
+.btn.bad{background:var(--seal);border-color:var(--seal);color:var(--paper)}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>.btn{flex:1 1 0}
+.stack{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--navy-soft);color:var(--navy)}
+.chip.star{background:var(--seal-soft);color:var(--seal)}
+.chip.good{background:var(--good-soft);color:var(--good)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.icon-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.icon-btn svg{width:20px;height:20px}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.seal{width:44px;height:44px;border-radius:50%;border:2px solid var(--seal);color:var(--seal);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:13px;flex:none;position:relative}
+.seal::after{content:"";position:absolute;inset:3px;border:1px dashed var(--seal);border-radius:50%;opacity:.6}
+.brand h1{font-family:var(--display);font-size:20px;line-height:1.15}
+.brand p{margin:0;font-size:13px;color:var(--muted)}
+
+/* home */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.ring{width:112px;height:112px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1.1}
+.ring .num b{font-family:var(--display);font-size:30px;font-variant-numeric:tabular-nums}
+.ring .num span{font-size:12px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+.stat{text-align:left}
+.stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:6px;min-height:118px}
+.mode:hover{border-color:var(--navy)}
+.mode .t{font-weight:700;font-size:17px}
+.mode .d{font-size:13px;color:var(--muted)}
+.mode .ic{width:34px;height:34px;border-radius:10px;background:var(--navy-soft);color:var(--navy);display:grid;place-items:center}
+.mode .ic svg{width:19px;height:19px}
+.mode.exam{grid-column:1/-1;background:var(--navy);border-color:var(--navy);color:var(--paper);min-height:auto}
+.mode.exam .d{color:var(--paper);opacity:.8}
+.mode.exam .ic{background:rgba(255,255,255,.14);color:var(--paper)}
+.secbar{display:flex;flex-direction:column;gap:10px}
+.secline{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:14px}
+.bar{grid-column:1/-1;height:6px;background:var(--navy-soft);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--navy);border-radius:99px}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0}
+.toggle label{flex:1;min-width:0}
+.toggle small{display:block;color:var(--muted);font-size:13px}
+.switch{appearance:none;width:48px;height:28px;border-radius:99px;background:var(--line);position:relative;flex:none;cursor:pointer;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.switch:checked{background:var(--navy)}
+.switch:checked::after{transform:translateX(20px)}
+
+/* question card */
+.qhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.qnum{font-family:var(--display);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.qtext{font-family:var(--display);font-size:22px;line-height:1.35}
+.qzh{font-size:15px;margin-top:8px}
+.answers{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.answers li{padding:10px 12px;border-radius:10px;background:var(--navy-soft);display:flex;flex-direction:column;gap:2px}
+.answers li .zh{font-size:14px}
+.note{font-size:13px;color:var(--muted);background:var(--warn-soft);border-radius:10px;padding:10px 12px}
+.note b{color:var(--warn)}
+.flash{min-height:300px;display:flex;flex-direction:column;gap:16px;cursor:pointer}
+.reveal-hint{margin-top:auto;font-size:13px;color:var(--muted);text-align:center;border-top:1px dashed var(--line);padding-top:12px}
+.progress-top{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.progress-top .bar{flex:1;grid-column:auto}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.opt:hover:not(:disabled){border-color:var(--navy)}
+.opt .zh{font-size:14px}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--seal);background:var(--seal-soft)}
+.opt:disabled{cursor:default}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.tally div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px}
+.tally b{display:block;font-size:24px;font-variant-numeric:tabular-nums;font-family:var(--display)}
+.tally span{font-size:12px;color:var(--muted)}
+.tally .ok b{color:var(--good)} .tally .no b{color:var(--seal)}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:14px;height:14px;border-radius:50%;background:var(--line)}
+.dots i.ok{background:var(--good)} .dots i.no{background:var(--seal)} .dots i.cur{outline:2px solid var(--navy);outline-offset:1px}
+.result{text-align:center;padding:28px 18px}
+.result .stamp{display:inline-block;font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:.08em;border:3px solid currentColor;border-radius:10px;padding:6px 18px;transform:rotate(-4deg);margin:10px 0 14px}
+.result.pass .stamp{color:var(--good)} .result.fail .stamp{color:var(--seal)}
+
+/* list */
+.search{display:flex;gap:8px}
+.search input,select,.field input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:12px 14px;font:inherit}
+.filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.filters button{flex:none;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;font-size:14px}
+.filters button.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+.qitem{border-bottom:1px solid var(--line)}
+.qitem summary{list-style:none;cursor:pointer;padding:14px 2px;display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:start}
+.qitem summary::-webkit-details-marker{display:none}
+.qitem .n{font-family:var(--display);color:var(--muted);font-variant-numeric:tabular-nums}
+.qitem .t{min-width:0}
+.qitem .t .zh{font-size:13px;display:block}
+.qitem .body{padding:0 2px 16px 46px;display:flex;flex-direction:column;gap:10px}
+.secttl{font-family:var(--display);font-size:15px;color:var(--seal);padding:18px 2px 4px;border-bottom:2px solid var(--line)}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.field span{color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+
+/* tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--line);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px));padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs nav{max-width:600px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--navy-soft);border-radius:12px;padding:4px}
+.segs button{border:0;background:none;border-radius:9px;padding:9px 4px;font-weight:600;font-size:14px;color:var(--muted)}
+.segs button.on{background:var(--card);color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.sentence{font-family:var(--display);font-size:26px;line-height:1.5;display:flex;flex-wrap:wrap;gap:2px 8px}
+.sentence button{border:0;background:none;padding:0 2px;border-radius:6px;font:inherit;color:var(--ink);border-bottom:2px dotted var(--line)}
+.sentence button:hover{background:var(--navy-soft)}
+.dict-in{width:100%;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:14px;font:inherit;font-size:20px;font-family:var(--display)}
+.diff{font-family:var(--display);font-size:20px;line-height:1.6;display:flex;flex-wrap:wrap;gap:2px 8px}
+.diff .ok{color:var(--good)}
+.diff .miss{color:var(--seal);text-decoration:underline wavy;text-underline-offset:4px}
+.diff .extra{color:var(--muted);text-decoration:line-through}
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.vocab button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 10px;font-size:15px}
+.vocab button:hover{border-color:var(--navy)}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 0 8px;font-size:11px;color:var(--muted);font-family:var(--zh)}
+.tabs button svg{width:22px;height:22px}
+.tabs button.on{color:var(--navy);font-weight:700}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:99px;font-size:14px;z-index:30;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+@media (max-width:420px){.qtext{font-size:20px}.hero{grid-template-columns:1fr;justify-items:center;text-align:center}.stats{width:100%}.stat{text-align:center}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+<div class="tabs"><nav id="tabs"></nav></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- 官方题库：USCIS M-1778 (09/25)，2025 版 128 题 ---------- */
+// [编号, 65/20星号, 英文问题, 中文问题, [[英文答案, 中文],...], 需答几项]
+const Q = [
+[1,0,"What is the form of government of the United States?","美国的政府形式是什么？",[["Republic","共和国"],["Constitution-based federal republic","以宪法为基础的联邦共和国"],["Representative democracy","代议制民主"]]],
+[2,1,"What is the supreme law of the land?","美国的最高法律是什么？",[["(U.S.) Constitution","（美国）宪法"]]],
+[3,0,"Name one thing the U.S. Constitution does.","说出美国宪法的一项作用。",[["Forms the government","组建政府"],["Defines powers of government","规定政府的权力"],["Defines the parts of government","规定政府的组成部分"],["Protects the rights of the people","保护人民的权利"]]],
+[4,0,"The U.S. Constitution starts with the words “We the People.” What does “We the People” mean?","美国宪法以 “We the People（我们人民）” 开头，它是什么意思？",[["Self-government","自治"],["Popular sovereignty","人民主权"],["Consent of the governed","被统治者的同意"],["People should govern themselves","人民应该自己治理自己"],["(Example of) social contract","社会契约（的例子）"]]],
+[5,0,"How are changes made to the U.S. Constitution?","如何修改美国宪法？",[["Amendments","修正案"],["The amendment process","修宪程序"]]],
+[6,0,"What does the Bill of Rights protect?","《权利法案》保护什么？",[["(The basic) rights of Americans","美国人的（基本）权利"],["(The basic) rights of people living in the United States","住在美国的人的（基本）权利"]]],
+[7,1,"How many amendments does the U.S. Constitution have?","美国宪法有多少条修正案？",[["Twenty-seven (27)","二十七条（27）"]]],
+[8,0,"Why is the Declaration of Independence important?","《独立宣言》为什么重要？",[["It says America is free from British control.","它宣布美国脱离英国控制。"],["It says all people are created equal.","它说人人生而平等。"],["It identifies inherent rights.","它确认了天赋（固有）权利。"],["It identifies individual freedoms.","它确认了个人自由。"]]],
+[9,0,"What founding document said the American colonies were free from Britain?","哪一份建国文件宣布美洲殖民地脱离英国？",[["Declaration of Independence","《独立宣言》"]]],
+[10,0,"Name two important ideas from the Declaration of Independence and the U.S. Constitution.","说出《独立宣言》和美国宪法中的两个重要理念。",[["Equality","平等"],["Liberty","自由"],["Social contract","社会契约"],["Natural rights","自然权利"],["Limited government","有限政府"],["Self-government","自治"]],2],
+[11,0,"The words “Life, Liberty, and the pursuit of Happiness” are in what founding document?","“生命、自由和追求幸福”出自哪一份建国文件？",[["Declaration of Independence","《独立宣言》"]]],
+[12,1,"What is the economic system of the United States?","美国的经济制度是什么？",[["Capitalism","资本主义"],["Free market economy","自由市场经济"]]],
+[13,0,"What is the rule of law?","什么是法治？",[["Everyone must follow the law.","人人都必须守法。"],["Leaders must obey the law.","领导人必须守法。"],["Government must obey the law.","政府必须守法。"],["No one is above the law.","任何人都不能凌驾于法律之上。"]]],
+[14,0,"Many documents influenced the U.S. Constitution. Name one.","许多文件影响了美国宪法，说出其中一份。",[["Declaration of Independence","《独立宣言》"],["Articles of Confederation","《邦联条例》"],["Federalist Papers","《联邦党人文集》"],["Anti-Federalist Papers","《反联邦党人文集》"],["Virginia Declaration of Rights","《弗吉尼亚权利宣言》"],["Fundamental Orders of Connecticut","《康涅狄格基本法》"],["Mayflower Compact","《五月花号公约》"],["Iroquois Great Law of Peace","易洛魁《和平大法》"]]],
+[15,0,"There are three branches of government. Why?","政府为什么有三个分支？",[["So one part does not become too powerful","防止某一部分权力过大"],["Checks and balances","制衡"],["Separation of powers","三权分立"]]],
+[16,0,"Name the three branches of government.","说出政府的三个分支。",[["Legislative, executive, and judicial","立法、行政和司法"],["Congress, president, and the courts","国会、总统和法院"]]],
+[17,0,"The President of the United States is in charge of which branch of government?","美国总统负责政府的哪个分支？",[["Executive branch","行政分支"]]],
+[18,0,"What part of the federal government writes laws?","联邦政府的哪个部分制定法律？",[["(U.S.) Congress","（美国）国会"],["(U.S. or national) legislature","（美国或国家）立法机构"],["Legislative branch","立法分支"]]],
+[19,0,"What are the two parts of the U.S. Congress?","美国国会由哪两部分组成？",[["Senate and House (of Representatives)","参议院和众议院"]]],
+[20,1,"Name one power of the U.S. Congress.","说出美国国会的一项权力。",[["Writes laws","制定法律"],["Declares war","宣战"],["Makes the federal budget","制定联邦预算"]]],
+[21,0,"How many U.S. senators are there?","美国有多少位联邦参议员？",[["One hundred (100)","一百位（100）"]]],
+[22,0,"How long is a term for a U.S. senator?","美国联邦参议员一届任期多长？",[["Six (6) years","六年（6）"]]],
+[23,0,"Who is one of your state's U.S. senators now?","你所在州现任的一位联邦参议员是谁？",[["Answers will vary.","答案因人而异。"]],1,"senator"],
+[24,0,"How many voting members are in the House of Representatives?","众议院有多少位有投票权的议员？",[["Four hundred thirty-five (435)","四百三十五位（435）"]]],
+[25,0,"How long is a term for a member of the House of Representatives?","众议员一届任期多长？",[["Two (2) years","两年（2）"]]],
+[26,0,"Why do U.S. representatives serve shorter terms than U.S. senators?","为什么众议员的任期比参议员短？",[["To more closely follow public opinion","为了更紧密地反映民意"]]],
+[27,0,"How many senators does each state have?","每个州有几位参议员？",[["Two (2)","两位（2）"]]],
+[28,0,"Why does each state have two senators?","为什么每个州有两位参议员？",[["Equal representation (for small states)","（让小州也有）平等代表权"],["The Great Compromise (Connecticut Compromise)","大妥协（康涅狄格妥协）"]]],
+[29,0,"Name your U.S. representative.","说出你的联邦众议员的名字。",[["Answers will vary.","答案因人而异。"]],1,"rep"],
+[30,1,"What is the name of the Speaker of the House of Representatives now?","现任众议院议长叫什么名字？",[["Mike Johnson","迈克·约翰逊"],["Johnson","约翰逊"]],1,"official"],
+[31,0,"Who does a U.S. senator represent?","美国参议员代表谁？",[["Citizens of their state","本州的公民"],["People of their state","本州的人民"]]],
+[32,0,"Who elects U.S. senators?","谁选举美国参议员？",[["Citizens from their state","本州的公民"]]],
+[33,0,"Who does a member of the House of Representatives represent?","众议员代表谁？",[["Citizens in their (congressional) district","本（国会）选区的公民"],["Citizens in their district","本选区的公民"],["People from their (congressional) district","来自本（国会）选区的人民"],["People in their district","本选区的人民"]]],
+[34,0,"Who elects members of the House of Representatives?","谁选举众议员？",[["Citizens from their (congressional) district","本（国会）选区的公民"]]],
+[35,0,"Some states have more representatives than other states. Why?","为什么有些州的众议员比其他州多？",[["(Because of) the state's population","（因为）州的人口"],["(Because) they have more people","（因为）他们人口更多"],["(Because) some states have more people","（因为）有些州人口更多"]]],
+[36,1,"The President of the United States is elected for how many years?","美国总统一届任期几年？",[["Four (4) years","四年（4）"]]],
+[37,0,"The President of the United States can serve only two terms. Why?","美国总统为什么最多只能连任两届？",[["(Because of) the 22nd Amendment","（因为）第22条修正案"],["To keep the president from becoming too powerful","防止总统权力过大"]]],
+[38,1,"What is the name of the President of the United States now?","现任美国总统叫什么名字？",[["Donald J. Trump","唐纳德·J·特朗普"],["Donald Trump","唐纳德·特朗普"],["Trump","特朗普"]],1,"official"],
+[39,1,"What is the name of the Vice President of the United States now?","现任美国副总统叫什么名字？",[["JD Vance","JD·万斯"],["Vance","万斯"]],1,"official"],
+[40,0,"If the president can no longer serve, who becomes president?","如果总统不能继续任职，谁成为总统？",[["The Vice President (of the United States)","（美国）副总统"]]],
+[41,0,"Name one power of the president.","说出总统的一项权力。",[["Signs bills into law","签署法案使之成为法律"],["Vetoes bills","否决法案"],["Enforces laws","执行法律"],["Commander in Chief (of the military)","（军队）三军总司令"],["Chief diplomat","首席外交官"],["Appoints federal judges","任命联邦法官"]]],
+[42,0,"Who is Commander in Chief of the U.S. military?","谁是美国军队的总司令？",[["The President (of the United States)","（美国）总统"]]],
+[43,0,"Who signs bills to become laws?","谁签署法案使之成为法律？",[["The President (of the United States)","（美国）总统"]]],
+[44,1,"Who vetoes bills?","谁否决法案？",[["The President (of the United States)","（美国）总统"]]],
+[45,0,"Who appoints federal judges?","谁任命联邦法官？",[["The President (of the United States)","（美国）总统"]]],
+[46,0,"The executive branch has many parts. Name one.","行政分支有许多部分，说出其中一个。",[["President (of the United States)","（美国）总统"],["Cabinet","内阁"],["Federal departments and agencies","联邦部门和机构"]]],
+[47,0,"What does the President's Cabinet do?","总统内阁做什么？",[["Advises the President (of the United States)","为（美国）总统提供建议"]]],
+[48,0,"What are two Cabinet-level positions?","说出两个内阁级职位。",[["Attorney General","司法部长"],["Secretary of Agriculture","农业部长"],["Secretary of Commerce","商务部长"],["Secretary of Education","教育部长"],["Secretary of Energy","能源部长"],["Secretary of Health and Human Services","卫生与公众服务部长"],["Secretary of Homeland Security","国土安全部长"],["Secretary of Housing and Urban Development","住房与城市发展部长"],["Secretary of the Interior","内政部长"],["Secretary of Labor","劳工部长"],["Secretary of State","国务卿"],["Secretary of Transportation","交通部长"],["Secretary of the Treasury","财政部长"],["Secretary of Veterans Affairs","退伍军人事务部长"],["Secretary of War (Defense)","战争部长（国防部长）"],["Vice-President","副总统"],["Administrator of the Environmental Protection Agency","环境保护署署长"],["Administrator of the Small Business Administration","小企业管理局局长"],["Director of the Central Intelligence Agency","中央情报局局长"],["Director of the Office of Management and Budget","管理和预算办公室主任"],["Director of National Intelligence","国家情报总监"],["United States Trade Representative","美国贸易代表"]],2],
+[49,0,"Why is the Electoral College important?","选举人团为什么重要？",[["It decides who is elected president.","它决定谁当选总统。"],["It provides a compromise between the popular election of the president and congressional selection.","它是总统由民众直选与由国会选出之间的折中。"]]],
+[50,0,"What is one part of the judicial branch?","司法分支的一个组成部分是什么？",[["Supreme Court","最高法院"],["Federal Courts","联邦法院"]]],
+[51,0,"What does the judicial branch do?","司法分支做什么？",[["Reviews laws","审查法律"],["Explains laws","解释法律"],["Resolves disputes (disagreements) about the law","解决有关法律的争议（分歧）"],["Decides if a law goes against the (U.S.) Constitution","判定法律是否违反（美国）宪法"]]],
+[52,1,"What is the highest court in the United States?","美国的最高法院是什么？",[["Supreme Court","最高法院"]]],
+[53,0,"How many seats are on the Supreme Court?","最高法院有几个席位？",[["Nine (9)","九个（9）"]]],
+[54,0,"How many Supreme Court justices are usually needed to decide a case?","通常需要几位最高法院大法官才能判决一个案件？",[["Five (5)","五位（5）"]]],
+[55,0,"How long do Supreme Court justices serve?","最高法院大法官任期多长？",[["(For) life","终身"],["Lifetime appointment","终身任命"],["(Until) retirement","（直到）退休"]]],
+[56,0,"Supreme Court justices serve for life. Why?","最高法院大法官为什么终身任职？",[["To be independent (of politics)","为了（不受政治影响）保持独立"],["To limit outside (political) influence","为了限制外部（政治）影响"]]],
+[57,0,"Who is the Chief Justice of the United States now?","现任美国首席大法官是谁？",[["John Roberts","约翰·罗伯茨"],["John G. Roberts, Jr.","小约翰·G·罗伯茨"],["Roberts","罗伯茨"]],1,"official"],
+[58,0,"Name one power that is only for the federal government.","说出一项只属于联邦政府的权力。",[["Print paper money","印制纸币"],["Mint coins","铸造硬币"],["Declare war","宣战"],["Create an army","组建军队"],["Make treaties","缔结条约"],["Set foreign policy","制定外交政策"]]],
+[59,0,"Name one power that is only for the states.","说出一项只属于州政府的权力。",[["Provide schooling and education","提供学校教育"],["Provide protection (police)","提供保护（警察）"],["Provide safety (fire departments)","提供安全（消防局）"],["Give a driver's license","发放驾照"],["Approve zoning and land use","审批分区规划和土地使用"]]],
+[60,0,"What is the purpose of the 10th Amendment?","第10条修正案的目的是什么？",[["(It states that the) powers not given to the federal government belong to the states or to the people.","（它规定）未授予联邦政府的权力属于各州或人民。"]]],
+[61,1,"Who is the governor of your state now?","你所在州的现任州长是谁？",[["Answers will vary.","答案因人而异。"]],1,"governor"],
+[62,0,"What is the capital of your state?","你所在州的首府是哪里？",[["Answers will vary.","答案因人而异。"]],1,"capital"],
+[63,0,"There are four amendments to the U.S. Constitution about who can vote. Describe one of them.","美国宪法有四条关于谁可以投票的修正案，描述其中一条。",[["Citizens eighteen (18) and older (can vote).","年满十八岁（18）的公民（可以投票）。"],["You don't have to pay (a poll tax) to vote.","投票不需要缴纳（人头税）。"],["Any citizen can vote. (Women and men can vote.)","任何公民都可以投票。（男女都可以投票。）"],["A male citizen of any race (can vote).","任何种族的男性公民（都可以投票）。"]]],
+[64,0,"Who can vote in federal elections, run for federal office, and serve on a jury in the United States?","在美国，谁可以在联邦选举中投票、竞选联邦公职并担任陪审员？",[["Citizens","公民"],["Citizens of the United States","美国公民"],["U.S. citizens","美国公民"]]],
+[65,0,"What are three rights of everyone living in the United States?","说出住在美国的每个人都享有的三项权利。",[["Freedom of expression","表达自由"],["Freedom of speech","言论自由"],["Freedom of assembly","集会自由"],["Freedom to petition the government","向政府请愿的自由"],["Freedom of religion","宗教自由"],["The right to bear arms","持有武器的权利"]],3],
+[66,1,"What do we show loyalty to when we say the Pledge of Allegiance?","我们宣读《效忠誓词》时是在向什么表示忠诚？",[["The United States","美国"],["The flag","国旗"]]],
+[67,0,"Name two promises that new citizens make in the Oath of Allegiance.","说出新公民在《入籍宣誓》中做出的两项承诺。",[["Give up loyalty to other countries","放弃对其他国家的效忠"],["Defend the (U.S.) Constitution","捍卫（美国）宪法"],["Obey the laws of the United States","遵守美国法律"],["Serve in the military (if needed)","（必要时）在军队服役"],["Serve (help, do important work for) the nation (if needed)","（必要时）为国家服务（帮忙、做重要工作）"],["Be loyal to the United States","效忠美国"]],2],
+[68,0,"How can people become United States citizens?","人们如何成为美国公民？",[["Be born in the United States, under the conditions set by the 14th Amendment","在第14条修正案规定的条件下出生在美国"],["Naturalize","入籍归化"],["Derive citizenship (under conditions set by Congress)","（在国会规定的条件下）获得衍生公民身份"]]],
+[69,0,"What are two examples of civic participation in the United States?","举出两个在美国参与公民活动的例子。",[["Vote","投票"],["Run for office","竞选公职"],["Join a political party","加入政党"],["Help with a campaign","协助竞选活动"],["Join a civic group","加入公民团体"],["Join a community group","加入社区团体"],["Give an elected official your opinion (on an issue)","（就某个问题）向民选官员表达意见"],["Contact elected officials","联系民选官员"],["Support or oppose an issue or policy","支持或反对某个议题或政策"],["Write to a newspaper","给报社写信"]],2],
+[70,0,"What is one way Americans can serve their country?","说出美国人为国家服务的一种方式。",[["Vote","投票"],["Pay taxes","纳税"],["Obey the law","守法"],["Serve in the military","在军队服役"],["Run for office","竞选公职"],["Work for local, state, or federal government","为地方、州或联邦政府工作"]]],
+[71,0,"Why is it important to pay federal taxes?","为什么缴纳联邦税很重要？",[["Required by law","法律要求"],["All people pay to fund the federal government","所有人都出钱支持联邦政府运作"],["Required by the (U.S.) Constitution (16th Amendment)","（美国）宪法要求（第16条修正案）"],["Civic duty","公民义务"]]],
+[72,0,"It is important for all men age 18 through 25 to register for the Selective Service. Name one reason why.","所有18至25岁的男性都应登记兵役，说出一个原因。",[["Required by law","法律要求"],["Civic duty","公民义务"],["Makes the draft fair, if needed","（如需征兵）让征兵公平"]]],
+[73,0,"The colonists came to America for many reasons. Name one.","殖民者来美洲有很多原因，说出一个。",[["Freedom","自由"],["Political liberty","政治自由"],["Religious freedom","宗教自由"],["Economic opportunity","经济机会"],["Escape persecution","逃避迫害"]]],
+[74,1,"Who lived in America before the Europeans arrived?","欧洲人到来之前，谁住在美洲？",[["American Indians","美洲印第安人"],["Native Americans","美洲原住民"]]],
+[75,0,"What group of people was taken and sold as slaves?","哪一群人被抓来卖作奴隶？",[["Africans","非洲人"],["People from Africa","来自非洲的人"]]],
+[76,0,"What war did the Americans fight to win independence from Britain?","美国人通过哪场战争赢得了脱离英国的独立？",[["American Revolution","美国革命"],["The (American) Revolutionary War","（美国）独立战争"],["War for (American) Independence","（美国）独立战争"]]],
+[77,0,"Name one reason why the Americans declared independence from Britain.","说出美国人宣布脱离英国独立的一个原因。",[["High taxes","高税收"],["Taxation without representation","无代表权却要纳税"],["British soldiers stayed in Americans' houses (boarding, quartering)","英国士兵住进美国人家里（驻营）"],["They did not have self-government","他们没有自治权"],["Boston Massacre","波士顿惨案"],["Boston Tea Party (Tea Act)","波士顿倾茶事件（《茶叶法》）"],["Stamp Act","《印花税法》"],["Sugar Act","《糖税法》"],["Townshend Acts","《汤森法案》"],["Intolerable (Coercive) Acts","《不可容忍法案》（《强制法案》）"]]],
+[78,1,"Who wrote the Declaration of Independence?","谁撰写了《独立宣言》？",[["(Thomas) Jefferson","（托马斯·）杰斐逊"]]],
+[79,0,"When was the Declaration of Independence adopted?","《独立宣言》是什么时候通过的？",[["July 4, 1776","1776年7月4日"]]],
+[80,0,"The American Revolution had many important events. Name one.","美国革命有许多重要事件，说出一个。",[["(Battle of) Bunker Hill","邦克山（战役）"],["Declaration of Independence","《独立宣言》"],["Washington Crossing the Delaware (Battle of Trenton)","华盛顿横渡特拉华河（特伦顿战役）"],["(Battle of) Saratoga","萨拉托加（战役）"],["Valley Forge (Encampment)","福吉谷（营地）"],["(Battle of) Yorktown (British surrender at Yorktown)","约克镇（战役）（英军在约克镇投降）"]]],
+[81,0,"There were 13 original states. Name five.","最初有13个州，说出其中五个。",[["New Hampshire","新罕布什尔"],["Massachusetts","马萨诸塞"],["Rhode Island","罗得岛"],["Connecticut","康涅狄格"],["New York","纽约"],["New Jersey","新泽西"],["Pennsylvania","宾夕法尼亚"],["Delaware","特拉华"],["Maryland","马里兰"],["Virginia","弗吉尼亚"],["North Carolina","北卡罗来纳"],["South Carolina","南卡罗来纳"],["Georgia","佐治亚"]],5],
+[82,0,"What founding document was written in 1787?","哪一份建国文件写于1787年？",[["(U.S.) Constitution","（美国）宪法"]]],
+[83,0,"The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.","《联邦党人文集》支持通过美国宪法，说出其中一位作者。",[["(James) Madison","（詹姆斯·）麦迪逊"],["(Alexander) Hamilton","（亚历山大·）汉密尔顿"],["(John) Jay","（约翰·）杰伊"],["Publius","普布利乌斯（笔名）"]]],
+[84,0,"Why were the Federalist Papers important?","《联邦党人文集》为什么重要？",[["They helped people understand the (U.S.) Constitution.","它们帮助人们理解（美国）宪法。"],["They supported passing the (U.S.) Constitution.","它们支持通过（美国）宪法。"]]],
+[85,0,"Benjamin Franklin is famous for many things. Name one.","本杰明·富兰克林因许多事而闻名，说出一件。",[["Founded the first free public libraries","创办了最早的免费公共图书馆"],["First Postmaster General of the United States","美国第一任邮政总长"],["Helped write the Declaration of Independence","协助起草《独立宣言》"],["Inventor","发明家"],["U.S. diplomat","美国外交官"]]],
+[86,1,"George Washington is famous for many things. Name one.","乔治·华盛顿因许多事而闻名，说出一件。",[["“Father of Our Country”","“国父”"],["First president of the United States","美国第一任总统"],["General of the Continental Army","大陆军总司令"],["President of the Constitutional Convention","制宪会议主席"]]],
+[87,0,"Thomas Jefferson is famous for many things. Name one.","托马斯·杰斐逊因许多事而闻名，说出一件。",[["Writer of the Declaration of Independence","《独立宣言》的作者"],["Third president of the United States","美国第三任总统"],["Doubled the size of the United States (Louisiana Purchase)","使美国领土扩大一倍（路易斯安那购地）"],["First Secretary of State","第一任国务卿"],["Founded the University of Virginia","创办弗吉尼亚大学"],["Writer of the Virginia Statute on Religious Freedom","《弗吉尼亚宗教自由法令》的作者"]]],
+[88,0,"James Madison is famous for many things. Name one.","詹姆斯·麦迪逊因许多事而闻名，说出一件。",[["“Father of the Constitution”","“宪法之父”"],["Fourth president of the United States","美国第四任总统"],["President during the War of 1812","1812年战争期间的总统"],["One of the writers of the Federalist Papers","《联邦党人文集》的作者之一"]]],
+[89,0,"Alexander Hamilton is famous for many things. Name one.","亚历山大·汉密尔顿因许多事而闻名，说出一件。",[["First Secretary of the Treasury","第一任财政部长"],["One of the writers of the Federalist Papers","《联邦党人文集》的作者之一"],["Helped establish the First Bank of the United States","协助建立美国第一银行"],["Aide to General George Washington","乔治·华盛顿将军的副官"],["Member of the Continental Congress","大陆会议成员"]]],
+[90,0,"What territory did the United States buy from France in 1803?","1803年美国从法国购买了哪块领土？",[["Louisiana Territory","路易斯安那领地"],["Louisiana","路易斯安那"]]],
+[91,0,"Name one war fought by the United States in the 1800s.","说出美国在19世纪（1800年代）打过的一场战争。",[["War of 1812","1812年战争"],["Mexican-American War","美墨战争"],["Civil War","南北战争（内战）"],["Spanish-American War","美西战争"]]],
+[92,0,"Name the U.S. war between the North and the South.","说出美国南方和北方之间的那场战争。",[["The Civil War","南北战争（内战）"]]],
+[93,0,"The Civil War had many important events. Name one.","南北战争有许多重要事件，说出一个。",[["(Battle of) Fort Sumter","萨姆特堡（战役）"],["Emancipation Proclamation","《解放黑奴宣言》"],["(Battle of) Vicksburg","维克斯堡（战役）"],["(Battle of) Gettysburg","葛底斯堡（战役）"],["Sherman's March","谢尔曼进军"],["(Surrender at) Appomattox","阿波马托克斯（投降）"],["(Battle of) Antietam/Sharpsburg","安提塔姆/夏普斯堡（战役）"],["Lincoln was assassinated.","林肯遇刺。"]]],
+[94,1,"Abraham Lincoln is famous for many things. Name one.","亚伯拉罕·林肯因许多事而闻名，说出一件。",[["Freed the slaves (Emancipation Proclamation)","解放黑奴（《解放黑奴宣言》）"],["Saved (or preserved) the Union","拯救（维护）了联邦"],["Led the United States during the Civil War","在南北战争期间领导美国"],["16th president of the United States","美国第16任总统"],["Delivered the Gettysburg Address","发表葛底斯堡演说"]]],
+[95,0,"What did the Emancipation Proclamation do?","《解放黑奴宣言》做了什么？",[["Freed the slaves","解放了奴隶"],["Freed slaves in the Confederacy","解放了南方邦联的奴隶"],["Freed slaves in the Confederate states","解放了邦联各州的奴隶"],["Freed slaves in most Southern states","解放了大多数南方州的奴隶"]]],
+[96,0,"What U.S. war ended slavery?","美国哪场战争终结了奴隶制？",[["The Civil War","南北战争（内战）"]]],
+[97,0,"What amendment says all persons born or naturalized in the United States, and subject to the jurisdiction thereof, are U.S. citizens?","哪一条修正案规定：凡在美国出生或入籍并受其管辖的人都是美国公民？",[["14th Amendment","第14条修正案"]]],
+[98,0,"When did all men get the right to vote?","所有男性是什么时候获得投票权的？",[["After the Civil War","南北战争之后"],["During Reconstruction","重建时期"],["(With the) 15th Amendment","（通过）第15条修正案"],["1870","1870年"]]],
+[99,0,"Name one leader of the women's rights movement in the 1800s.","说出19世纪妇女权利运动的一位领袖。",[["Susan B. Anthony","苏珊·B·安东尼"],["Elizabeth Cady Stanton","伊丽莎白·卡迪·斯坦顿"],["Sojourner Truth","索杰纳·特鲁斯"],["Harriet Tubman","哈丽特·塔布曼"],["Lucretia Mott","卢克丽霞·莫特"],["Lucy Stone","露西·斯通"]]],
+[100,0,"Name one war fought by the United States in the 1900s.","说出美国在20世纪（1900年代）打过的一场战争。",[["World War I","第一次世界大战"],["World War II","第二次世界大战"],["Korean War","朝鲜战争"],["Vietnam War","越南战争"],["(Persian) Gulf War","（波斯）海湾战争"]]],
+[101,0,"Why did the United States enter World War I?","美国为什么加入第一次世界大战？",[["Because Germany attacked U.S. (civilian) ships","因为德国攻击了美国（民用）船只"],["To support the Allied Powers (England, France, Italy, and Russia)","支持协约国（英国、法国、意大利和俄国）"],["To oppose the Central Powers (Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria)","对抗同盟国（德国、奥匈帝国、奥斯曼帝国和保加利亚）"]]],
+[102,0,"When did all women get the right to vote?","所有女性是什么时候获得投票权的？",[["1920","1920年"],["After World War I","第一次世界大战之后"],["(With the) 19th Amendment","（通过）第19条修正案"]]],
+[103,0,"What was the Great Depression?","什么是大萧条？",[["Longest economic recession in modern history","现代历史上持续最久的经济衰退"]]],
+[104,0,"When did the Great Depression start?","大萧条是什么时候开始的？",[["The Great Crash (1929)","大崩盘（1929年）"],["Stock market crash of 1929","1929年股市崩盘"]]],
+[105,0,"Who was president during the Great Depression and World War II?","大萧条和第二次世界大战期间的总统是谁？",[["(Franklin) Roosevelt","（富兰克林·）罗斯福"]]],
+[106,0,"Why did the United States enter World War II?","美国为什么加入第二次世界大战？",[["(Bombing of) Pearl Harbor","珍珠港（被轰炸）"],["Japanese attacked Pearl Harbor","日本袭击了珍珠港"],["To support the Allied Powers (England, France, and Russia)","支持同盟国（英国、法国和俄国）"],["To oppose the Axis Powers (Germany, Italy, and Japan)","对抗轴心国（德国、意大利和日本）"]]],
+[107,0,"Dwight Eisenhower is famous for many things. Name one.","德怀特·艾森豪威尔因许多事而闻名，说出一件。",[["General during World War II","第二次世界大战时的将军"],["President at the end of (during) the Korean War","朝鲜战争结束时（期间）的总统"],["34th president of the United States","美国第34任总统"],["Signed the Federal-Aid Highway Act of 1956 (Created the Interstate System)","签署1956年《联邦援助公路法》（建立州际公路系统）"]]],
+[108,0,"Who was the United States' main rival during the Cold War?","冷战期间美国的主要对手是谁？",[["Soviet Union","苏联"],["USSR","苏联（USSR）"],["Russia","俄罗斯"]]],
+[109,0,"During the Cold War, what was one main concern of the United States?","冷战期间，美国主要担心的一件事是什么？",[["Communism","共产主义"],["Nuclear war","核战争"]]],
+[110,0,"Why did the United States enter the Korean War?","美国为什么参加朝鲜战争？",[["To stop the spread of communism","阻止共产主义扩散"]]],
+[111,0,"Why did the United States enter the Vietnam War?","美国为什么参加越南战争？",[["To stop the spread of communism","阻止共产主义扩散"]]],
+[112,0,"What did the civil rights movement do?","民权运动做了什么？",[["Fought to end racial discrimination","为结束种族歧视而斗争"]]],
+[113,1,"Martin Luther King, Jr. is famous for many things. Name one.","小马丁·路德·金因许多事而闻名，说出一件。",[["Fought for civil rights","为民权而斗争"],["Worked for equality for all Americans","为全体美国人的平等而努力"],["Worked to ensure that people would “not be judged by the color of their skin, but by the content of their character”","努力让人们“不以肤色，而以品格来评判”"]]],
+[114,0,"Why did the United States enter the Persian Gulf War?","美国为什么参加波斯湾战争？",[["To force the Iraqi military from Kuwait","迫使伊拉克军队撤出科威特"]]],
+[115,1,"What major event happened on September 11, 2001 in the United States?","2001年9月11日美国发生了什么重大事件？",[["Terrorists attacked the United States","恐怖分子袭击了美国"],["Terrorists took over two planes and crashed them into the World Trade Center in New York City","恐怖分子劫持两架飞机撞向纽约世贸中心"],["Terrorists took over a plane and crashed into the Pentagon in Arlington, Virginia","恐怖分子劫持一架飞机撞向弗吉尼亚州阿灵顿的五角大楼"],["Terrorists took over a plane originally aimed at Washington, D.C., and crashed in a field in Pennsylvania","恐怖分子劫持一架原本飞向华盛顿特区的飞机，坠毁在宾夕法尼亚州的田野"]]],
+[116,0,"Name one U.S. military conflict after the September 11, 2001 attacks.","说出2001年9·11袭击之后美国参与的一场军事冲突。",[["(Global) War on Terror","（全球）反恐战争"],["War in Afghanistan","阿富汗战争"],["War in Iraq","伊拉克战争"]]],
+[117,0,"Name one American Indian tribe in the United States.","说出美国的一个印第安部落。",[["Apache","阿帕奇"],["Blackfeet","黑脚"],["Cayuga","卡尤加"],["Cherokee","切罗基"],["Cheyenne","夏延"],["Chippewa","奇珀瓦"],["Choctaw","乔克托"],["Creek","克里克"],["Crow","克劳"],["Hopi","霍皮"],["Huron","休伦"],["Inupiat","伊努皮亚特"],["Lakota","拉科塔"],["Mohawk","莫霍克"],["Mohegan","莫希干"],["Navajo","纳瓦霍"],["Oneida","奥奈达"],["Onondaga","奥农达加"],["Pueblo","普韦布洛"],["Seminole","塞米诺尔"],["Seneca","塞内卡"],["Shawnee","肖尼"],["Sioux","苏族"],["Teton","提顿"],["Tuscarora","塔斯卡罗拉"]]],
+[118,0,"Name one example of an American innovation.","举出一个美国创新的例子。",[["Light bulb","电灯泡"],["Automobile (cars, internal combustion engine)","汽车（轿车、内燃机）"],["Skyscrapers","摩天大楼"],["Airplane","飞机"],["Assembly line","流水线"],["Landing on the moon","登月"],["Integrated circuit (IC)","集成电路（IC）"]]],
+[119,0,"What is the capital of the United States?","美国的首都是哪里？",[["Washington, D.C.","华盛顿特区"]]],
+[120,0,"Where is the Statue of Liberty?","自由女神像在哪里？",[["New York (Harbor)","纽约（港）"],["Liberty Island","自由岛"]]],
+[121,1,"Why does the flag have 13 stripes?","国旗为什么有13条横纹？",[["(Because there were) 13 original colonies","（因为当初有）13个原始殖民地"],["(Because the stripes) represent the original colonies","（因为横纹）代表最初的殖民地"]]],
+[122,0,"Why does the flag have 50 stars?","国旗为什么有50颗星？",[["(Because there is) one star for each state","（因为）每个州一颗星"],["(Because) each star represents a state","（因为）每颗星代表一个州"],["(Because there are) 50 states","（因为有）50个州"]]],
+[123,0,"What is the name of the national anthem?","美国国歌叫什么名字？",[["The Star-Spangled Banner","《星条旗》"]]],
+[124,0,"The Nation's first motto was “E Pluribus Unum.” What does that mean?","美国的第一句国家格言是 “E Pluribus Unum”，它是什么意思？",[["Out of many, one","合众为一"],["We all become one","我们合而为一"]]],
+[125,0,"What is Independence Day?","什么是独立日？",[["A holiday to celebrate U.S. independence (from Britain)","庆祝美国（脱离英国）独立的节日"],["The country's birthday","国家的生日"]]],
+[126,1,"Name three national U.S. holidays.","说出三个美国国定假日。",[["New Year's Day","元旦"],["Martin Luther King, Jr. Day","马丁·路德·金纪念日"],["Presidents Day (Washington's Birthday)","总统日（华盛顿诞辰）"],["Memorial Day","阵亡将士纪念日"],["Juneteenth","六月节（奴隶解放日）"],["Independence Day","独立日"],["Labor Day","劳动节"],["Columbus Day","哥伦布日"],["Veterans Day","退伍军人节"],["Thanksgiving Day","感恩节"],["Christmas Day","圣诞节"]],3],
+[127,0,"What is Memorial Day?","什么是阵亡将士纪念日？",[["A holiday to honor soldiers who died in military service","纪念在服役中牺牲的军人的节日"]]],
+[128,0,"What is Veterans Day?","什么是退伍军人节？",[["A holiday to honor people in the (U.S.) military","向（美国）现役军人致敬的节日"],["A holiday to honor people who have served (in the U.S. military)","向曾在（美国军队）服役的人致敬的节日"]]]
+].map(([id,star,q,qz,a,n,kind])=>({id,star:!!star,q,qz,a,n:n||1,kind:kind||null}));
+
+const SECTIONS=[
+ {key:"gov",name:"美国政府",en:"American Government",parts:[["A","政府原则",1,15],["B","政府体制",16,62],["C","权利与义务",63,72]]},
+ {key:"his",name:"美国历史",en:"American History",parts:[["A","殖民与独立",73,89],["B","19世纪",90,99],["C","近代历史",100,118]]},
+ {key:"sym",name:"标志与节日",en:"Symbols and Holidays",parts:[["A","国家标志",119,124],["B","节日",125,128]]}
+];
+const secOf=id=>SECTIONS.find(s=>s.parts.some(p=>id>=p[2]&&id<=p[3]));
+const partOf=id=>{for(const s of SECTIONS)for(const p of s.parts)if(id>=p[2]&&id<=p[3])return{s,p};};
+
+const CAPITALS={"Alabama":"Montgomery","Alaska":"Juneau","Arizona":"Phoenix","Arkansas":"Little Rock","California":"Sacramento","Colorado":"Denver","Connecticut":"Hartford","Delaware":"Dover","Florida":"Tallahassee","Georgia":"Atlanta","Hawaii":"Honolulu","Idaho":"Boise","Illinois":"Springfield","Indiana":"Indianapolis","Iowa":"Des Moines","Kansas":"Topeka","Kentucky":"Frankfort","Louisiana":"Baton Rouge","Maine":"Augusta","Maryland":"Annapolis","Massachusetts":"Boston","Michigan":"Lansing","Minnesota":"Saint Paul","Mississippi":"Jackson","Missouri":"Jefferson City","Montana":"Helena","Nebraska":"Lincoln","Nevada":"Carson City","New Hampshire":"Concord","New Jersey":"Trenton","New Mexico":"Santa Fe","New York":"Albany","North Carolina":"Raleigh","North Dakota":"Bismarck","Ohio":"Columbus","Oklahoma":"Oklahoma City","Oregon":"Salem","Pennsylvania":"Harrisburg","Rhode Island":"Providence","South Carolina":"Columbia","South Dakota":"Pierre","Tennessee":"Nashville","Texas":"Austin","Utah":"Salt Lake City","Vermont":"Montpelier","Virginia":"Richmond","Washington":"Olympia","West Virginia":"Charleston","Wisconsin":"Madison","Wyoming":"Cheyenne"};
+
+/* ---------- 本地存储 ---------- */
+const KEY="civics2025.v1";
+const blank=()=>({p:{},wrong:[],exams:[],settings:{zh:true,senior:false,rate:0.9,state:"",senator:"",rep:"",governor:""}});
+let S=blank();
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);S={...blank(),...o,settings:{...blank().settings,...(o.settings||{})}};}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+const prog=id=>S.p[id]||(S.p[id]={seen:0,ok:0,streak:0});
+const mastered=id=>(S.p[id]&&S.p[id].streak>=2);
+function mark(id,good){
+  const p=prog(id);p.seen++;
+  if(good){p.ok++;p.streak++;if(p.streak>=2)S.wrong=S.wrong.filter(x=>x!==id);}
+  else{p.streak=0;if(!S.wrong.includes(id))S.wrong.push(id);}
+  save();
+}
+const pool=()=>S.settings.senior?Q.filter(q=>q.star):Q;
+
+/* ---------- 工具 ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),1600);}
+const SLOW=0.6;
+function speak(text,rate){
+  try{if(!("speechSynthesis" in window)){toast("这个浏览器不支持朗读");return;}
+    speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[“”]/g,'"'));
+    u.lang="en-US";u.rate=rate||S.settings.rate;
+    const v=speechSynthesis.getVoices().find(v=>/en[-_]US/i.test(v.lang));if(v)u.voice=v;
+    speechSynthesis.speak(u);}catch(e){toast("朗读不可用");}
+}
+const I={
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>',
+ cards:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="15" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v13"/></svg>',
+ quiz:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>',
+ exam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>',
+ list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg>',
+ wrong:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4z"/><path d="m9 11 6 6M15 11l-6 6"/></svg>',
+ pen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>',
+ slow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c0-4 3.5-7 8-7s8 3 8 6v1H3z"/><path d="M19 14h1.5a1.5 1.5 0 0 0 0-3H19"/><path d="M6 15v3M16 15v3"/><path d="M8 11.5 11 9l3 2.5"/></svg>',
+ speak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',
+ back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+ gear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>'
+};
+
+/* 本地答案（州参议员等） */
+function localAnswer(q){
+  const st=S.settings;
+  if(q.kind==="capital")return st.state?CAPITALS[st.state]:"";
+  if(q.kind==="senator")return st.senator;if(q.kind==="rep")return st.rep;if(q.kind==="governor")return st.governor;
+  return "";
+}
+function answersHTML(q){
+  const zh=S.settings.zh;
+  if(q.kind&&q.kind!=="official"){
+    const mine=localAnswer(q);
+    const where={senator:"可在 senate.gov 查询",rep:"可在 house.gov 输入邮编查询",governor:"可在州政府官网查询",capital:"在“设置”里选择你的州即可自动填写"}[q.kind];
+    return `<ul class="answers">${mine?`<li><b>${esc(mine)}</b>${S.settings.state?`<span class="zh">${esc(S.settings.state)}</span>`:""}</li>`:""}</ul>
+    <div class="note"><b>答案因人而异。</b> ${mine?"以上是你在设置里填写的答案。":"请在首页“设置”里填写你所在州的信息。"}${where}。住在华盛顿特区或美属领地的人有特别答法，详见 USCIS 官方题库。</div>`;
+  }
+  let h=`<ul class="answers">${q.a.map(([e,c])=>`<li><span>${esc(e)}</span>${zh?`<span class="zh">${esc(c)}</span>`:""}</li>`).join("")}</ul>`;
+  if(q.n>1)h+=`<div class="note"><b>需要说出 ${q.n} 个。</b> 从上面任选 ${q.n} 个回答即可。</div>`;
+  if(q.kind==="official")h+=`<div class="note"><b>答案会随选举或任命变化。</b> 面试时要回答当时在任者的名字。以上答案依据 USCIS 2025-09-18 更新，考前请到 uscis.gov/citizenship/testupdates 核对。</div>`;
+  if(q.id===120)h+=`<div class="note">也可以回答 New Jersey、near New York City 或 on the Hudson (River)。</div>`;
+  return h;
+}
+function qBlock(q,{answers=false}={}){
+  const {s,p}=partOf(q.id);
+  return `<div class="qhead"><div class="row" style="gap:6px;align-items:center"><span class="qnum">No. ${q.id}</span><span class="chip">${s.name} · ${p[1]}</span>${q.star?'<span class="chip star">★ 65/20</span>':""}${mastered(q.id)?'<span class="chip good">已掌握</span>':""}</div>
+  <div class="row" style="gap:6px;flex:none"><button class="icon-btn" data-speak="${q.id}" aria-label="朗读英文问题">${I.speak}</button><button class="icon-btn" data-speak="${q.id}" data-slow="1" aria-label="慢速朗读">${I.slow}</button></div></div>
+  <div class="qtext">${esc(q.q)}</div>${S.settings.zh?`<div class="qzh zh">${esc(q.qz)}</div>`:""}
+  ${answers?`<div style="margin-top:14px">${answersHTML(q)}</div>`:""}`;
+}
+
+/* ---------- 路由 ---------- */
+let view="home",state={};
+const TABS=[["home","首页",I.home],["learn","卡片",I.cards],["quiz","练习",I.quiz],["exam","模拟考",I.exam],["rw","读写",I.pen],["list","题库",I.list]];
+function go(v,st={}){view=v;state=st;try{speechSynthesis.cancel();}catch(e){}render();window.scrollTo(0,0);}
+function renderTabs(){
+  const base=view.split(":")[0];
+  $("#tabs").innerHTML=TABS.map(([k,l,ic])=>`<button class="${base===k?"on":""}" data-go="${k}" aria-label="${l}">${ic}<span>${l}</span></button>`).join("");
+}
+function render(){renderTabs();({home:Home,learn:Learn,quiz:Quiz,exam:Exam,rw:RWView,list:List,wrong:Wrong,settings:Settings}[view]||Home)();}
+
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]");if(g){go(g.dataset.go);return;}
+  const slow=b=>b.dataset.slow?SLOW:undefined;
+  const sp=e.target.closest("[data-speak]");if(sp){e.stopPropagation();const q=Q.find(x=>x.id==sp.dataset.speak);speak(q.q,slow(sp));return;}
+  const sa=e.target.closest("[data-speak-a]");if(sa){e.stopPropagation();const q=Q.find(x=>x.id==sa.dataset.speakA);speak(q.a.slice(0,q.n).map(a=>a[0]).join(". "),slow(sa));return;}
+  const sy=e.target.closest("[data-say]");if(sy){e.stopPropagation();speak(sy.dataset.say,slow(sy));}
+});
+
+/* ---------- 首页 ---------- */
+function Home(){
+  const P=pool(),m=P.filter(q=>mastered(q.id)).length,pct=P.length?m/P.length:0;
+  const seen=P.filter(q=>S.p[q.id]&&S.p[q.id].seen).length;
+  const lastExam=S.exams[S.exams.length-1];
+  const C=2*Math.PI*48;
+  const secHTML=SECTIONS.map(s=>{const qs=P.filter(q=>secOf(q.id)===s);if(!qs.length)return"";const mm=qs.filter(q=>mastered(q.id)).length;
+    return `<div class="secline"><span>${s.name} <span class="zh" style="font-size:12px">${s.en}</span></span><span style="font-variant-numeric:tabular-nums;color:var(--muted)">${mm}/${qs.length}</span><div class="bar"><i style="width:${qs.length?mm/qs.length*100:0}%"></i></div></div>`;}).join("");
+  $("#app").innerHTML=`
+  <div class="top"><div class="brand"><div class="seal">USCIS</div><div><h1>入籍公民考试题库</h1><p>2025 版官方 128 题 · 中英对照</p></div></div>
+  <button class="icon-btn" data-go="settings" aria-label="设置">${I.gear}</button></div>
+  <div class="stack">
+   <div class="card hero">
+    <div class="ring"><svg viewBox="0 0 112 112"><circle cx="56" cy="56" r="48" fill="none" stroke="var(--navy-soft)" stroke-width="10"/><circle cx="56" cy="56" r="48" fill="none" stroke="var(--navy)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct)}"/></svg>
+     <div class="num"><div><b>${m}</b><br><span>/ ${P.length} 已掌握</span></div></div></div>
+    <div><div class="eyebrow">${S.settings.senior?"65/20 特别照顾 · 20 题":"标准考试 · 128 题"}</div>
+     <div style="font-size:15px;margin-top:4px">面试官最多问 <b>${S.settings.senior?10:20}</b> 题，答对 <b>${S.settings.senior?6:12}</b> 题即通过。</div>
+     <div class="stats"><div class="stat"><b>${seen}</b><span>学过</span></div><div class="stat"><b>${S.wrong.filter(id=>P.some(q=>q.id===id)).length}</b><span>错题</span></div><div class="stat"><b>${lastExam?lastExam.ok+"/"+lastExam.total:"—"}</b><span>上次模考</span></div></div></div>
+   </div>
+   <div class="modes">
+    <button class="mode exam" data-go="exam"><div class="ic">${I.exam}</div><div class="t">模拟面试</div><div class="d">像真实面试一样：听英文问题，口头回答，再看答案自评。答对 ${S.settings.senior?6:12} 题通过，答错 ${S.settings.senior?5:9} 题结束。</div></button>
+    <button class="mode" data-go="learn"><div class="ic">${I.cards}</div><div class="t">记忆卡片</div><div class="d">翻卡背题，没掌握的优先出现</div></button>
+    <button class="mode" data-go="quiz"><div class="ic">${I.quiz}</div><div class="t">选择题练习</div><div class="d">四选一，每轮 10 题</div></button>
+    <button class="mode" data-go="wrong"><div class="ic">${I.wrong}</div><div class="t">错题本</div><div class="d">连续答对 2 次自动移出</div></button>
+    <button class="mode" data-go="rw"><div class="ic">${I.pen}</div><div class="t">英文读写</div><div class="d">跟读句子、听写句子，可慢速播放</div></button>
+   </div>
+   <div class="card secbar"><div class="eyebrow">分类进度</div>${secHTML}</div>
+   <div class="card"><div class="toggle"><label for="sw-senior">65/20 特别照顾<small>65 岁以上且持绿卡满 20 年：只需学 20 道带 ★ 的题，可用中文考</small></label><input type="checkbox" class="switch" id="sw-senior" ${S.settings.senior?"checked":""}></div>
+   <div class="toggle"><label for="sw-zh">显示中文翻译<small>关掉后只看英文，更接近真实考试</small></label><input type="checkbox" class="switch" id="sw-zh" ${S.settings.zh?"checked":""}></div></div>
+   <p class="zh" style="font-size:12px;margin:0">题目和答案来自 USCIS 官方文件 M-1778 (09/25)，适用于 2025 年 10 月 20 日及以后递交 N-400 的申请人。学习进度只保存在这台设备的浏览器里。</p>
+  </div>`;
+  $("#sw-senior").onchange=e=>{S.settings.senior=e.target.checked;save();render();};
+  $("#sw-zh").onchange=e=>{S.settings.zh=e.target.checked;save();render();};
+}
+
+/* ---------- 设置 ---------- */
+function Settings(){
+  const st=S.settings;
+  $("#app").innerHTML=`<div class="top"><div class="brand"><button class="icon-btn" data-go="home" aria-label="返回">${I.back}</button><div><h1>设置</h1><p>填写你所在州的答案</p></div></div></div>
+  <div class="stack"><div class="card stack">
+   <label class="field" for="f-state"><span>你住在哪个州（第 62 题首府会自动填写）</span><select id="f-state"><option value="">请选择</option>${Object.keys(CAPITALS).map(k=>`<option ${st.state===k?"selected":""}>${k}</option>`).join("")}</select></label>
+   <label class="field" for="f-sen"><span>第 23 题：你所在州的一位联邦参议员</span><input id="f-sen" value="${esc(st.senator)}" placeholder="例如在 senate.gov 查到的名字"></label>
+   <label class="field" for="f-rep"><span>第 29 题：你的联邦众议员</span><input id="f-rep" value="${esc(st.rep)}" placeholder="在 house.gov 输入邮编查询"></label>
+   <label class="field" for="f-gov"><span>第 61 题：你所在州的州长</span><input id="f-gov" value="${esc(st.governor)}" placeholder="州长姓名"></label>
+  </div>
+  <div class="card stack"><label class="field" for="f-rate"><span>英文朗读语速：<b id="rate-v">${st.rate.toFixed(1)}</b>×</span><input type="range" id="f-rate" min="0.6" max="1.2" step="0.1" value="${st.rate}"></label>
+   <button class="btn" id="test-voice">${I.speak} 试听</button></div>
+  <div class="card stack"><div class="eyebrow">重置</div><p style="margin:0;font-size:14px;color:var(--muted)">清除这台设备上的所有学习记录、错题和模考成绩。</p>
+   <button class="btn" id="reset">清除学习记录</button><div id="reset-confirm" hidden class="row"><button class="btn bad" id="reset-yes">确认清除</button><button class="btn" id="reset-no">取消</button></div></div>
+  <a class="btn ghost" href="https://www.uscis.gov/citizenship/find-study-materials-and-resources/study-for-the-test" target="_blank" rel="noopener">USCIS 官方学习资料 ↗</a></div>`;
+  const bind=(id,k)=>$(id).oninput=e=>{S.settings[k]=e.target.value.trim();save();};
+  $("#f-state").onchange=e=>{st.state=e.target.value;save();toast(st.state?"首府："+CAPITALS[st.state]:"已清除");};
+  bind("#f-sen","senator");bind("#f-rep","rep");bind("#f-gov","governor");
+  $("#f-rate").oninput=e=>{st.rate=+e.target.value;$("#rate-v").textContent=st.rate.toFixed(1);save();};
+  $("#test-voice").onclick=()=>speak("What is the supreme law of the land?");
+  $("#reset").onclick=()=>{$("#reset-confirm").hidden=false;};
+  $("#reset-no").onclick=()=>{$("#reset-confirm").hidden=true;};
+  $("#reset-yes").onclick=()=>{const keep=S.settings;S=blank();S.settings=keep;save();toast("已清除");go("home");};
+}
+
+/* ---------- 记忆卡片 ---------- */
+function learnDeck(ids){
+  const P=ids?Q.filter(q=>ids.includes(q.id)):pool();
+  const score=q=>{const p=S.p[q.id];return p?(p.streak*10+p.seen):-1;};
+  return shuffle(P).sort((a,b)=>score(a)-score(b)).map(q=>q.id);
+}
+function Learn(){
+  if(!state.deck){state.deck=learnDeck(state.ids);state.i=0;state.flip=false;state.done=0;}
+  const {deck}=state;
+  if(state.i>=deck.length){
+    $("#app").innerHTML=`<div class="card result pass"><div class="stamp">DONE</div><h2>这一组学完了</h2><p class="zh">共 ${deck.length} 张卡片。</p><div class="row" style="margin-top:16px"><button class="btn primary" id="again">再来一轮</button><button class="btn" data-go="home">回首页</button></div></div>`;
+    $("#again").onclick=()=>go("learn",{ids:state.ids});return;}
+  const q=Q.find(x=>x.id===deck[state.i]);
+  $("#app").innerHTML=`
+  <div class="stack">
+   <div class="progress-top"><span>${state.ids?"错题卡片":"记忆卡片"}</span><div class="bar"><i style="width:${state.i/deck.length*100}%"></i></div><span>${state.i+1}/${deck.length}</span></div>
+   <div class="card flash" id="flash" tabindex="0" role="button" aria-label="${state.flip?"答案":"点击查看答案"}">
+    ${qBlock(q,{answers:state.flip})}
+    ${state.flip?(q.kind?"":`<div class="row"><button class="btn ghost" data-speak-a="${q.id}" style="flex:none">${I.speak} 朗读答案</button><button class="btn ghost" data-speak-a="${q.id}" data-slow="1" style="flex:none">${I.slow} 慢速</button></div>`):`<div class="reveal-hint">先在心里用英文回答，再点卡片看答案</div>`}
+   </div>
+   ${state.flip?`<div class="row"><button class="btn bad" id="no">还不会</button><button class="btn good" id="yes">记住了</button></div>`:`<button class="btn primary" id="show">显示答案</button>`}
+  </div>`;
+  const flip=()=>{if(!state.flip){state.flip=true;Learn();}};
+  $("#flash").onclick=flip;$("#flash").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}};
+  if($("#show"))$("#show").onclick=flip;
+  const next=g=>{mark(q.id,g);state.i++;state.flip=false;Learn();};
+  if($("#yes")){$("#yes").onclick=()=>next(true);$("#no").onclick=()=>next(false);}
+}
+
+/* ---------- 选择题 ---------- */
+function correctLabel(q){const picks=shuffle(q.a).slice(0,q.n);return{e:picks.map(a=>a[0]).join(" · "),z:picks.map(a=>a[1]).join(" · ")};}
+function buildOptions(q){
+  const valid=new Set(q.a.map(a=>a[0]));
+  const right=correctLabel(q);
+  const sameSec=Q.filter(x=>x.id!==q.id&&!x.kind&&secOf(x.id)===secOf(q.id));
+  // 先用同一大类的题做干扰项，不够再从其他类补
+  const others=[...shuffle(sameSec),...shuffle(Q.filter(x=>x.id!==q.id&&!x.kind&&secOf(x.id)!==secOf(q.id)))];
+  const opts=[],seen=new Set([right.e]);
+  for(const o of others){
+    if(opts.length>=3)break;
+    const cand=shuffle(o.a.filter(a=>!valid.has(a[0]))).slice(0,q.n);
+    if(cand.length<q.n)continue;
+    const e=cand.map(a=>a[0]).join(" · ");if(seen.has(e))continue;
+    seen.add(e);opts.push({e,z:cand.map(a=>a[1]).join(" · "),ok:false});
+  }
+  opts.push({...right,ok:true});return shuffle(opts);
+}
+function Quiz(){
+  if(!state.list){
+    const src=state.ids?Q.filter(q=>state.ids.includes(q.id)):pool();
+    const P=src.filter(q=>!q.kind||q.kind==="official");
+    const w=q=>{const p=S.p[q.id];return p?p.streak:-1;};
+    state.list=shuffle(P).sort((a,b)=>w(a)-w(b)).slice(0,Math.min(10,P.length)).map(q=>q.id);
+    state.i=0;state.ok=0;state.ans=null;state.opts=null;
+  }
+  if(state.i>=state.list.length){
+    const pass=state.ok/state.list.length>=0.6;
+    $("#app").innerHTML=`<div class="card result ${pass?"pass":"fail"}"><div class="stamp">${state.ok}/${state.list.length}</div><h2>${pass?"做得不错":"再练练"}</h2><p class="zh">答错的题已经加入错题本。</p><div class="row" style="margin-top:16px"><button class="btn primary" id="again">再来 10 题</button><button class="btn" data-go="wrong">看错题</button></div></div>`;
+    $("#again").onclick=()=>go("quiz",{ids:state.ids});return;}
+  const q=Q.find(x=>x.id===state.list[state.i]);
+  if(!state.opts)state.opts=buildOptions(q);
+  const zh=S.settings.zh,a=state.ans;
+  $("#app").innerHTML=`<div class="stack">
+   <div class="progress-top"><span>选择题</span><div class="bar"><i style="width:${state.i/state.list.length*100}%"></i></div><span>${state.i+1}/${state.list.length} · 对 ${state.ok}</span></div>
+   <div class="card">${qBlock(q)}${q.n>1?`<div class="note" style="margin-top:12px"><b>需要说出 ${q.n} 个。</b> 选出全部正确的那一组。</div>`:""}</div>
+   <div class="opts">${state.opts.map((o,i)=>{let c="";if(a!==null){if(o.ok)c="right";else if(i===a)c="wrong";}
+     return `<button class="opt ${c}" data-i="${i}" ${a!==null?"disabled":""}><span>${esc(o.e)}</span>${zh?`<span class="zh">${esc(o.z)}</span>`:""}</button>`;}).join("")}</div>
+   ${a!==null?`<details class="card"><summary style="cursor:pointer;font-weight:600">查看全部可接受答案</summary><div style="margin-top:12px">${answersHTML(q)}</div></details><button class="btn primary" id="next">${state.i+1<state.list.length?"下一题":"看结果"}</button>`:""}
+  </div>`;
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;state.ans=i;const ok=state.opts[i].ok;if(ok)state.ok++;mark(q.id,ok);Quiz();});
+  if($("#next"))$("#next").onclick=()=>{state.i++;state.ans=null;state.opts=null;Quiz();};
+}
+
+/* ---------- 模拟面试 ---------- */
+function Exam(){
+  const senior=S.settings.senior,need=senior?6:12,maxWrong=senior?5:9,total=senior?10:20;
+  if(!state.started){
+    const hist=S.exams.slice(-5).reverse();
+    $("#app").innerHTML=`<div class="top"><div class="brand"><div class="seal">N-400</div><div><h1>模拟面试</h1><p>${senior?"65/20 特别照顾":"2025 版公民考试"}</p></div></div></div>
+    <div class="stack"><div class="card stack">
+     <div class="eyebrow">规则</div>
+     <p style="margin:0">面试官从${senior?" 20 道 ★ 题中":" 128 题中"}随机口头提问，最多 ${total} 题。<b>答对 ${need} 题</b>就通过并停止提问；<b>答错 ${maxWrong} 题</b>就不通过。</p>
+     <p style="margin:0" class="zh">点“朗读”听英文问题，大声用英文回答，再看答案判断自己对不对。建议关掉中文翻译来模拟真实情况。</p>
+     <div class="toggle"><label for="ex-zh">考试时显示中文<small>${senior?"65/20 可以选择用中文考":"真实考试只有英文"}</small></label><input type="checkbox" class="switch" id="ex-zh" ${S.settings.zh?"checked":""}></div>
+     <button class="btn primary" id="start">开始模拟面试</button></div>
+     ${hist.length?`<div class="card"><div class="eyebrow" style="margin-bottom:8px">最近成绩</div>${hist.map(h=>`<div class="secline" style="padding:6px 0;border-bottom:1px solid var(--line)"><span>${h.date}</span><span class="chip ${h.pass?"good":"warn"}">${h.pass?"通过":"未通过"} · 对 ${h.ok}/${h.total}</span></div>`).join("")}</div>`:""}
+    </div>`;
+    $("#ex-zh").onchange=e=>{S.settings.zh=e.target.checked;save();};
+    $("#start").onclick=()=>{const P=senior?Q.filter(q=>q.star):Q;state={started:true,list:shuffle(P).slice(0,total).map(q=>q.id),i:0,res:[],flip:false};Exam();setTimeout(()=>speak(Q.find(x=>x.id===state.list[0]).q),250);};
+    return;
+  }
+  const ok=state.res.filter(Boolean).length,no=state.res.length-ok;
+  if(ok>=need||no>=maxWrong||state.i>=state.list.length){
+    const pass=ok>=need;
+    if(!state.saved){state.saved=true;const d=new Date();S.exams.push({date:`${d.getMonth()+1}月${d.getDate()}日 ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`,ok,total:state.res.length,pass});S.exams=S.exams.slice(-30);save();}
+    const missed=state.list.slice(0,state.res.length).filter((id,i)=>!state.res[i]);
+    $("#app").innerHTML=`<div class="stack"><div class="card result ${pass?"pass":"fail"}"><div class="eyebrow">模拟面试结果</div><div class="stamp">${pass?"PASSED":"NOT YET"}</div>
+     <h2>${pass?"恭喜，你通过了！":"这次没通过，再接再厉"}</h2><p class="zh">共回答 ${state.res.length} 题，答对 ${ok} 题${pass?"":"，需要答对 "+need+" 题"}。</p>
+     <div class="row" style="margin-top:16px"><button class="btn primary" id="again">再考一次</button><button class="btn" data-go="home">回首页</button></div></div>
+     ${missed.length?`<div class="card"><div class="eyebrow" style="margin-bottom:6px">答错的题</div>${missed.map(id=>{const q=Q.find(x=>x.id===id);return `<div style="padding:10px 0;border-bottom:1px solid var(--line)"><div><span class="qnum">${id}.</span> ${esc(q.q)}</div><div style="font-size:14px;color:var(--good);margin-top:4px">${q.kind&&q.kind!=="official"?"答案因人而异":esc(q.a.slice(0,q.n).map(a=>a[0]).join(" · "))}</div></div>`;}).join("")}</div>`:""}</div>`;
+    $("#again").onclick=()=>go("exam");return;
+  }
+  const q=Q.find(x=>x.id===state.list[state.i]);
+  $("#app").innerHTML=`<div class="stack">
+   <div class="tally"><div><b>${state.i+1}</b><span>第几题</span></div><div class="ok"><b>${ok}</b><span>答对 / 需 ${need}</span></div><div class="no"><b>${no}</b><span>答错 / 上限 ${maxWrong}</span></div></div>
+   <div class="dots">${state.list.map((id,i)=>`<i class="${i<state.res.length?(state.res[i]?"ok":"no"):(i===state.i?"cur":"")}"></i>`).join("")}</div>
+   <div class="card flash" id="flash">${qBlock(q,{answers:state.flip})}${state.flip?"":`<div class="reveal-hint">面试官：<i>“${esc(q.q)}”</i><br>请大声用英文回答，然后点“显示答案”</div>`}</div>
+   ${state.flip?`<div class="row"><button class="btn bad" id="no">我答错了</button><button class="btn good" id="yes">我答对了</button></div>`:`<div class="row"><button class="btn" data-speak="${q.id}">${I.speak} 再听</button><button class="btn" data-speak="${q.id}" data-slow="1">${I.slow} 慢速</button></div><button class="btn primary" id="show">显示答案</button>`}
+  </div>`;
+  if($("#show"))$("#show").onclick=()=>{state.flip=true;Exam();};
+  const ans=g=>{state.res.push(g);mark(q.id,g);state.i++;state.flip=false;Exam();
+    const left=state.res.filter(Boolean).length<need&&state.res.filter(x=>!x).length<maxWrong&&state.i<state.list.length;
+    if(left)setTimeout(()=>speak(Q.find(x=>x.id===state.list[state.i]).q),250);};
+  if($("#yes")){$("#yes").onclick=()=>ans(true);$("#no").onclick=()=>ans(false);}
+}
+
+/* ---------- 错题本 ---------- */
+function Wrong(){
+  const ids=S.wrong.filter(id=>pool().some(q=>q.id===id));
+  $("#app").innerHTML=`<div class="top"><div class="brand"><button class="icon-btn" data-go="home" aria-label="返回">${I.back}</button><div><h1>错题本</h1><p>${ids.length} 道题待复习</p></div></div></div>
+  ${ids.length?`<div class="stack"><div class="row"><button class="btn primary" id="wl">卡片复习</button><button class="btn" id="wq">选择题练习</button></div>
+   <div class="card" style="padding:4px 16px">${ids.map(id=>itemHTML(Q.find(q=>q.id===id))).join("")}</div></div>`
+   :`<div class="card empty"><div style="font-size:40px;font-family:var(--display);color:var(--good)">0</div><p>还没有错题。做选择题、翻卡片或模拟面试时，答错的题会自动收进这里。</p><button class="btn primary" data-go="quiz">去做练习</button></div>`}`;
+  if(ids.length){$("#wl").onclick=()=>go("learn",{ids});$("#wq").onclick=()=>go("quiz",{ids});}
+}
+
+/* ---------- 英文读写 ---------- */
+// 练习句只用 USCIS 官方阅读/写作词汇表 (rev. 08/08) 里的词编写：阅读句是问题，写作句是它的答案
+const RW=[
+["Who was the first President?","谁是第一任总统？","Washington was the first President.","华盛顿是第一任总统。"],
+["Who is the Father of Our Country?","谁是国父？","Washington is the Father of Our Country.","华盛顿是国父。"],
+["Who was the second President?","谁是第二任总统？","Adams was the second President.","亚当斯是第二任总统。"],
+["Who was Abraham Lincoln?","亚伯拉罕·林肯是谁？","Lincoln was the President during the Civil War.","林肯是南北战争时期的总统。"],
+["Who is on the dollar bill?","一美元纸币上是谁？","Washington is on the dollar bill.","一美元纸币上是华盛顿。"],
+["What is the capital of the United States?","美国的首都是哪里？","Washington, D.C. is the capital of the United States.","华盛顿特区是美国的首都。"],
+["Where is the White House?","白宫在哪里？","The White House is in Washington, D.C.","白宫在华盛顿特区。"],
+["Where does the President live?","总统住在哪里？","The President lives in the White House.","总统住在白宫。"],
+["Where does Congress meet?","国会在哪里开会？","Congress meets in Washington, D.C.","国会在华盛顿特区开会。"],
+["How many Senators do we have?","我们有多少位参议员？","We have one hundred Senators.","我们有一百位参议员。"],
+["How many states are in the United States?","美国有多少个州？","The United States has fifty states.","美国有五十个州。"],
+["What was the first state?","第一个州是哪个？","Delaware was the first state.","特拉华是第一个州。"],
+["What is the largest state?","最大的州是哪个？","Alaska is the largest state.","阿拉斯加是最大的州。"],
+["What state has the most people?","哪个州人口最多？","California has the most people.","加利福尼亚人口最多。"],
+["What country is north of the United States?","美国北边是哪个国家？","Canada is north of the United States.","加拿大在美国北边。"],
+["What country is south of the United States?","美国南边是哪个国家？","Mexico is south of the United States.","墨西哥在美国南边。"],
+["What are the colors of the American flag?","美国国旗是什么颜色？","The flag is red, white, and blue.","国旗是红、白、蓝三色。"],
+["Who lived here first?","最早住在这里的是谁？","American Indians lived here first.","美洲印第安人最早住在这里。"],
+["Who can vote?","谁可以投票？","Citizens can vote.","公民可以投票。"],
+["When do we vote for President?","我们什么时候选总统？","We vote for President in November.","我们在十一月选总统。"],
+["Who elects Congress?","谁选举国会？","Citizens elect Congress.","公民选举国会。"],
+["What do we pay to the government?","我们向政府缴纳什么？","We pay taxes.","我们纳税。"],
+["Why do people come to America?","人们为什么来美国？","People come here to be free.","人们来这里是为了自由。"],
+["What is one right in the Bill of Rights?","说出《权利法案》中的一项权利。","Freedom of speech is one right.","言论自由是一项权利。"],
+["Who has the right to vote?","谁有投票权？","Citizens have the right to vote.","公民有投票权。"],
+["When is Presidents' Day?","总统日在什么时候？","Presidents' Day is in February.","总统日在二月。"],
+["When is Memorial Day?","阵亡将士纪念日在什么时候？","Memorial Day is in May.","阵亡将士纪念日在五月。"],
+["When is Flag Day?","国旗日在什么时候？","Flag Day is in June.","国旗日在六月。"],
+["When is Independence Day?","独立日在什么时候？","Independence Day is in July.","独立日在七月。"],
+["When is Labor Day?","劳动节在什么时候？","Labor Day is in September.","劳动节在九月。"],
+["When is Columbus Day?","哥伦布日在什么时候？","Columbus Day is in October.","哥伦布日在十月。"],
+["When is Thanksgiving?","感恩节在什么时候？","Thanksgiving is in November.","感恩节在十一月。"]
+];
+const VOCAB={
+ "阅读词汇":{"人物":["Abraham Lincoln","George Washington"],"公民":["American flag","Bill of Rights","capital","citizen","city","Congress","country","Father of Our Country","government","President","right","Senators","state/states","White House"],"地点":["America","United States","U.S."],"节日":["Presidents' Day","Memorial Day","Flag Day","Independence Day","Labor Day","Columbus Day","Thanksgiving"],"疑问词":["How","What","When","Where","Who","Why"],"动词":["can","come","do/does","elects","have/has","is/are/was/be","lives/lived","meet","name","pay","vote","want"],"其他":["a","for","here","in","of","on","the","to","we","colors","dollar bill","first","largest","many","most","north","one","people","second","south"]},
+ "写作词汇":{"人物":["Adams","Lincoln","Washington"],"公民":["American Indians","capital","citizens","Civil War","Congress","Father of Our Country","flag","free","freedom of speech","President","right","Senators","state/states","White House"],"地点":["Alaska","California","Canada","Delaware","Mexico","New York City","United States","Washington","Washington, D.C."],"月份":["February","May","June","July","September","October","November"],"节日":["Presidents' Day","Memorial Day","Flag Day","Independence Day","Labor Day","Columbus Day","Thanksgiving"],"动词":["can","come","elect","have/has","is/was/be","lives/lived","meets","pay","vote","want"],"其他":["and","during","for","here","in","of","on","the","to","we","blue","dollar bill","fifty/50","first","largest","most","north","one","one hundred/100","people","red","second","south","taxes","white"]}
+};
+const NUMS={"50":["fifty"],"100":["one","hundred"]};
+const words=s=>s.split(/\s+/).filter(Boolean);
+const norm=s=>words(s.toLowerCase().replace(/d\.c\./g,"dc").replace(/[^a-z0-9'\s]/g," ")).flatMap(w=>NUMS[w]||[w]);
+function diffWords(target,input){
+  // 用最长公共子序列对齐：漏写/写错的目标词标红，多写的词划掉
+  const T=words(target),tn=T.map(w=>norm(w).join(" ")),I2=norm(input);
+  const tt=[];T.forEach((w,i)=>tn[i].split(" ").filter(Boolean).forEach(x=>tt.push({x,i})));
+  const n=tt.length,m=I2.length,L=Array.from({length:n+1},()=>new Array(m+1).fill(0));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=tt[i].x===I2[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  const hit=new Set(),extra=[];let i=0,j=0;
+  while(i<n&&j<m){if(tt[i].x===I2[j]){hit.add(i);i++;j++;}else if(L[i+1][j]>=L[i][j+1])i++;else{extra.push(I2[j]);j++;}}
+  while(j<m)extra.push(I2[j++]);
+  const okWord=T.map((w,k)=>tt.every((t,ti)=>t.i!==k||hit.has(ti)));
+  return {T,okWord,extra,perfect:okWord.every(Boolean)&&!extra.length};
+}
+function RWView(){
+  if(!state.mode){state.mode="read";state.order=shuffle(RW.map((_,i)=>i));state.i=0;state.checked=null;}
+  const segs=[["read","阅读跟读"],["write","听写"],["vocab","词汇表"]];
+  const head=`<div class="top"><div class="brand"><div class="seal">ABC</div><div><h1>英文读写</h1><p>面试时读对 1 句、写对 1 句即可</p></div></div></div>
+   <div class="segs" role="tablist">${segs.map(([k,l])=>`<button data-mode="${k}" class="${state.mode===k?"on":""}" role="tab" aria-selected="${state.mode===k}">${l}</button>`).join("")}</div>`;
+  const idx=state.order[state.i%state.order.length],item=RW[idx],zh=S.settings.zh;
+  const nav=`<div class="row"><button class="btn" id="prev">上一句</button><button class="btn primary" id="next">下一句</button></div>`;
+  let body="";
+  if(state.mode==="read"){
+    body=`<div class="card stack">
+      <div class="qhead" style="margin:0"><span class="qnum">阅读 ${state.i%RW.length+1} / ${RW.length}</span><span class="chip">点单词可听发音</span></div>
+      <div class="sentence">${words(item[0]).map(w=>`<button data-say="${esc(w.replace(/[?.,]/g,""))}" data-slow="1">${esc(w)}</button>`).join("")}</div>
+      ${zh?`<div class="zh">${esc(item[1])}</div>`:""}
+      <div class="row"><button class="btn" data-say="${esc(item[0])}">${I.speak} 正常速度</button><button class="btn" data-say="${esc(item[0])}" data-slow="1">${I.slow} 慢速跟读</button></div>
+      <div class="note"><b>怎么练：</b>先听慢速，跟着大声读，再听正常速度读一遍。面试时官员会让你读出屏幕上的一句话，读对就通过。</div>
+     </div>
+     <details class="card"><summary style="cursor:pointer;font-weight:600">这句话的答案（写作也常考这句）</summary><div style="margin-top:12px" class="stack"><div style="font-family:var(--display);font-size:20px">${esc(item[2])}</div>${zh?`<div class="zh">${esc(item[3])}</div>`:""}<div class="row"><button class="btn" data-say="${esc(item[2])}" style="flex:none">${I.speak} 朗读</button><button class="btn" data-say="${esc(item[2])}" data-slow="1" style="flex:none">${I.slow} 慢速</button></div></div></details>${nav}`;
+  }else if(state.mode==="write"){
+    const c=state.checked;
+    body=`<div class="card stack">
+      <div class="qhead" style="margin:0"><span class="qnum">听写 ${state.i%RW.length+1} / ${RW.length}</span>${zh?`<span class="zh" style="font-size:13px">提示：${esc(item[3])}</span>`:""}</div>
+      <div class="row"><button class="btn" data-say="${esc(item[2])}">${I.speak} 播放句子</button><button class="btn" data-say="${esc(item[2])}" data-slow="1">${I.slow} 慢速播放</button></div>
+      <label for="dict" class="eyebrow">把听到的句子写下来</label>
+      <input id="dict" class="dict-in" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Type what you hear…" value="${esc(state.typed||"")}">
+      ${c?`<div class="stack" style="gap:8px"><div class="eyebrow">${c.perfect?'<span style="color:var(--good)">完全正确</span>':"对照结果：红色是漏写或写错的词"}</div>
+        <div class="diff">${c.T.map((w,k)=>`<span class="${c.okWord[k]?"ok":"miss"}">${esc(w)}</span>`).join("")}</div>
+        ${c.extra.length?`<div class="diff"><span class="zh" style="font-size:14px;font-family:var(--zh)">多写了：</span>${c.extra.map(w=>`<span class="extra">${esc(w)}</span>`).join("")}</div>`:""}
+        ${c.caseWarn?`<div class="note"><b>注意大小写。</b> 人名、地名、节日和句首字母要大写。</div>`:""}</div>`
+       :`<button class="btn primary" id="check">检查</button>`}
+      <div class="note"><b>评分说明：</b>真实考试里，小的拼写错误只要不影响意思，一般不会判错；数字写 50 或 fifty 都可以。这里检查得比较严，帮你把每个词都写对。</div>
+     </div>${nav}`;
+  }else{
+    body=`<p class="zh" style="margin:0;font-size:14px">这是 USCIS 官方词汇表，考试的阅读句和写作句只会用到这些词。点任意一个词可以听慢速发音。</p>
+     ${Object.entries(VOCAB).map(([t,g])=>`<div class="card stack"><h3 style="font-family:var(--display)">${t}</h3>${Object.entries(g).map(([k,ws])=>`<div class="stack" style="gap:8px"><div class="eyebrow">${k}</div><div class="vocab">${ws.map(w=>`<button data-say="${esc(w.replace("/"," or "))}" data-slow="1">${esc(w)}</button>`).join("")}</div></div>`).join("")}</div>`).join("")}`;
+  }
+  $("#app").innerHTML=`${head}<div class="stack" style="margin-top:14px">${body}</div>`;
+  document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{state.mode=b.dataset.mode;state.checked=null;state.typed="";RWView();
+    if(state.mode==="write")speak(RW[state.order[state.i%RW.length]][2],SLOW);});
+  const move=d=>{state.i=(state.i+d+RW.length)%RW.length;state.checked=null;state.typed="";RWView();
+    if(state.mode==="write")setTimeout(()=>speak(RW[state.order[state.i]][2],SLOW),200);};
+  if($("#next")){$("#next").onclick=()=>move(1);$("#prev").onclick=()=>move(-1);}
+  const inp=$("#dict");
+  if(inp){
+    inp.oninput=e=>{state.typed=e.target.value;};
+    const check=()=>{const r=diffWords(item[2],inp.value);
+      const bare=s=>words(s.replace(/[^A-Za-z0-9'\s]/g," ")).join(" ");
+      r.caseWarn=r.perfect&&!/\d/.test(inp.value)&&bare(inp.value)!==bare(item[2]);
+      state.checked=r;state.typed=inp.value;RWView();};
+    inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();if(!state.checked)check();else move(1);}};
+    if($("#check"))$("#check").onclick=check;
+  }
+}
+
+/* ---------- 题库 ---------- */
+function itemHTML(q){
+  const p=S.p[q.id];
+  const st=mastered(q.id)?'<span class="chip good">已掌握</span>':(S.wrong.includes(q.id)?'<span class="chip warn">错题</span>':(q.star?'<span class="chip star">★</span>':""));
+  return `<details class="qitem"><summary><span class="n">${q.id}</span><span class="t">${esc(q.q)}${S.settings.zh?`<span class="zh">${esc(q.qz)}</span>`:""}</span>${st}</summary>
+  <div class="body">${answersHTML(q)}<div class="row"><button class="btn" data-speak="${q.id}" style="flex:none">${I.speak} 朗读问题</button><button class="btn" data-speak="${q.id}" data-slow="1" style="flex:none">${I.slow} 慢速</button></div></div></details>`;
+}
+function List(){
+  if(state.f===undefined){state.f="all";state.s="";}
+  const P=pool();
+  const filters=[["all","全部"],["star","★ 65/20"],...SECTIONS.map(s=>[s.key,s.name])];
+  $("#app").innerHTML=`<div class="top"><div class="brand"><div class="seal">128</div><div><h1>全部题目</h1><p>点开题目看答案</p></div></div></div>
+  <div class="stack"><div class="search"><input id="s" type="search" placeholder="搜索英文或中文，如 senator、总统" value="${esc(state.s)}" aria-label="搜索题目"></div>
+  <div class="filters">${filters.map(([k,l])=>`<button data-f="${k}" class="${state.f===k?"on":""}">${l}</button>`).join("")}</div>
+  <div id="items"></div></div>`;
+  const draw=()=>{
+    const s=state.s.toLowerCase();
+    let qs=P.filter(q=>state.f==="all"||(state.f==="star"?q.star:secOf(q.id).key===state.f));
+    if(s)qs=qs.filter(q=>(q.q+q.qz+q.a.map(a=>a.join(" ")).join(" ")+" "+q.id).toLowerCase().includes(s));
+    let html="",last="";
+    for(const q of qs){const {s:sec,p}=partOf(q.id);const k=sec.key+p[0];if(k!==last&&!s){html+=`<div class="secttl">${sec.en} · ${p[0]}: ${p[1]}</div>`;last=k;}html+=itemHTML(q);}
+    $("#items").innerHTML=html||`<div class="empty">没有找到相关题目</div>`;
+  };
+  draw();
+  $("#s").oninput=e=>{state.s=e.target.value;draw();};
+  document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{state.f=b.dataset.f;List();});
+}
+
+try{speechSynthesis.getVoices();}catch(e){}
+render();
+</script>
+
+</body>
+</html>
